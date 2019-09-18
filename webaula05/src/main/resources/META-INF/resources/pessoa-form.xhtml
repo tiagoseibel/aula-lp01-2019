@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Cadastro de pessoas</title>
+    </head>
+    <body>
+        <h:form>
+            <h1>Cadastro de pessoas</h1>
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Código" />
+                <h:inputText value="#{pessoaBean.pessoa.codigo}"/>
+                <h:outputLabel value="Nome:" />
+                <h:inputText value="#{pessoaBean.pessoa.nome}"/>
+                <h:outputLabel value="Telefone:" />
+                <h:inputText value="#{pessoaBean.pessoa.telefone}"/>
+                <h:outputLabel value="Departamento" />
+                <h:selectOneMenu value="#{pessoaBean.pessoa.departamento}" converter="#{departamentoConverter}">
+                    <f:selectItems value="#{departamentoBean.lista}" var="item" itemLabel="#{item.nome}"/>
+                </h:selectOneMenu>
+                <h:commandButton value="Adicionar" action="#{pessoaBean.adicionar()}" />
+            </h:panelGrid>
+
+            <p>&nbsp;</p>
+
+            <h:dataTable value="#{pessoaBean.lista}" var="item" style="width:600px">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Código"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codigo}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nome"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nome}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Telefone"/>
+                    </f:facet>
+                    <h:outputText value="#{item.telefone}" />
+                </h:column>                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Departamento"/>
+                    </f:facet>
+                    <h:outputText value="#{item.departamento.id}" />
+                </h:column>                     
+            </h:dataTable>
+        </h:form>
+    </body>
+</html>
+
